@@ -14,6 +14,8 @@ public class TarifaKey implements Serializable{
 	@Column(name = "id_empresa")
 	private Long idEmpresa;
 	
+	public TarifaKey() {}
+	
 	public TarifaKey(Long idParroquia, Long idEmpresa) {
 		super();
 		this.idParroquia = idParroquia;
