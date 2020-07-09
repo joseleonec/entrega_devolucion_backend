@@ -1,8 +1,10 @@
 package com.example.demo.Modelo;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,12 +24,20 @@ public class Parroquia {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_parroquia")
 	private int idParroquia;
+	
 	@Column(name = "nombre_parroquia", length = 50)
 	private String nombreParroquia;
-
-	@OneToMany(mappedBy = "parroquia")
+	
+	@OneToMany(mappedBy = "empresaEnvios")
 	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
-
+	
+	public void AddTarifa(Tarifa tarifa) {
+        if(this.tarifas == null){
+            this.tarifas = new HashSet<>();
+        }
+        this.tarifas.add(tarifa);
+	}
+	
 //	@ManyToMany
 //	@JoinTable(name = "tarifa", joinColumns = @JoinColumn(name = "id_parroquia"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
 //	Set<EmpresaEnvios> empresasEnlazadas;

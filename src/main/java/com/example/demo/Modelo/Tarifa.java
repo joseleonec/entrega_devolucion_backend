@@ -1,8 +1,13 @@
 package com.example.demo.Modelo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -10,66 +15,53 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tarifa")
-public class Tarifa {
+public class Tarifa implements Serializable {
 
-	@EmbeddedId
-	private TarifaKey id= new TarifaKey();
+	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@MapsId("idParroquia") // nombre del atributo de la clase Parroquia
-	@JoinColumn(name = "id_parroquia")
-	private Parroquia parroquia;
-
+//	@EmbeddedId
+//	private TarifaKey idTarifa;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="id_tarifa")
+	private int idTarifa;
+	
 	@ManyToOne
 	@MapsId("idEmpresa") // nombre del atributo de la clase EmpresaEnvios
 	@JoinColumn(name = "id_empresa")
 	private EmpresaEnvios empresaEnvios;
+	
+	@ManyToOne
+	@MapsId("idParroquia") // nombre del atributo de la clase Parroquia
+	@JoinColumn(name = "id_parroquia")
+	private Parroquia parroquia;
 
 	@Column(name = "costo")
 	private double costo;
 	@Column(name = "minutos_estimados")
 	private double minutosEstimados;
 
-	public Tarifa(double costo, double minutosEstimados) {
-		super();
-		this.costo = costo;
-		this.minutosEstimados = minutosEstimados;
-	}
-
-	public Tarifa(TarifaKey id, Parroquia parroquia, EmpresaEnvios empresaEnvios, double costo,
-			double minutosEstimados) {
-		super();
-		this.id = id;
-		this.parroquia = parroquia;
-		this.empresaEnvios = empresaEnvios;
-		this.costo = costo;
-		this.minutosEstimados = minutosEstimados;
-	}
-
-	public Tarifa(TarifaKey id, Parroquia parroquia, EmpresaEnvios empresaEnvios) {
-		super();
-		this.id = id;
-		this.parroquia = parroquia;
-		this.empresaEnvios = empresaEnvios;
-	}
-
-	public Tarifa(Parroquia parroquia, EmpresaEnvios empresaEnvios) {
-		super();
-		this.parroquia = parroquia;
-		this.empresaEnvios = empresaEnvios;
-	}
+//	public Tarifa(TarifaKey idTarifa, Parroquia parroquia, EmpresaEnvios empresaEnvios, double costo,
+//			double minutosEstimados) {
+//		super();
+//		this.idTarifa = idTarifa;
+//		this.parroquia = parroquia;
+//		this.empresaEnvios = empresaEnvios;
+//		this.costo = costo;
+//		this.minutosEstimados = minutosEstimados;
+//	}
 
 	public Tarifa() {
 		super();
 	}
 
-	public TarifaKey getId() {
-		return id;
-	}
-
-	public void setId(TarifaKey id) {
-		this.id = id;
-	}
+//	public TarifaKey getIdTarifa() {
+//		return idTarifa;
+//	}
+//
+//	public void setIdTarifa(TarifaKey idTarifa) {
+//		this.idTarifa = idTarifa;
+//	}
 
 	public Parroquia getParroquia() {
 		return parroquia;
@@ -108,7 +100,7 @@ public class Tarifa {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((empresaEnvios == null) ? 0 : empresaEnvios.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+//		result = prime * result + ((idTarifa == null) ? 0 : idTarifa.hashCode());
 		result = prime * result + ((parroquia == null) ? 0 : parroquia.hashCode());
 		return result;
 	}
@@ -127,11 +119,11 @@ public class Tarifa {
 				return false;
 		} else if (!empresaEnvios.equals(other.empresaEnvios))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+//		if (idTarifa == null) {
+//			if (other.idTarifa != null)
+//				return false;
+//		} else if (!idTarifa.equals(other.idTarifa))
+//			return false;
 		if (parroquia == null) {
 			if (other.parroquia != null)
 				return false;

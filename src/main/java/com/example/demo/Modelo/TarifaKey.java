@@ -8,6 +8,11 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TarifaKey implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "id_parroquia")
 	private int idParroquia;
 

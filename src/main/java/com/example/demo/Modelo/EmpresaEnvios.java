@@ -3,13 +3,17 @@ package com.example.demo.Modelo;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "empresa_de_envios")
@@ -19,18 +23,30 @@ public class EmpresaEnvios {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_empresa")
 	private int idEmpresa;
+
 	@Column(name = "razon_social")
 	private String razonSocial;
+	
 	@Column(name = "min_paquetes_por_viaje")
 	private int minimoDePaquetesPorViaje;
+	
 	@Column(name = "costo_km_extra")
 	private double costoKmExtra;
+	
 	@Column(name = "costo_kg_extra")
 	private double costoKgExtra;
+	
 	@Column(name = "maximo_peso_paquete")
 	private double pesoMaximoDelPaquete;
 
-	@OneToMany(mappedBy = "empresaEnvios")
+	@JoinTable(name = "tarifa", 
+			joinColumns = @JoinColumn(name = "id_empresa", nullable = false), 
+			inverseJoinColumns = @JoinColumn(name = "id_parroquia", nullable = false)
+	)
+	@ManyToMany
+	private Set<Parroquia> parroquias = new HashSet<Parroquia>();
+
+	@OneToMany(mappedBy = "parroquia")
 	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
 
 	public EmpresaEnvios(String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra, double costoKgExtra,
@@ -129,7 +145,7 @@ public class EmpresaEnvios {
 		temp = Double.doubleToLongBits(pesoMaximoDelPaquete);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((razonSocial == null) ? 0 : razonSocial.hashCode());
-		result = prime * result + ((tarifas == null) ? 0 : tarifas.hashCode());
+//		result = prime * result + ((tarifas == null) ? 0 : tarifas.hashCode());
 		return result;
 	}
 
@@ -157,11 +173,11 @@ public class EmpresaEnvios {
 				return false;
 		} else if (!razonSocial.equals(other.razonSocial))
 			return false;
-		if (tarifas == null) {
-			if (other.tarifas != null)
-				return false;
-		} else if (!tarifas.equals(other.tarifas))
-			return false;
+//		if (tarifas == null) {
+//			if (other.tarifas != null)
+//				return false;
+//		} else if (!tarifas.equals(other.tarifas))
+//			return false;
 		return true;
 	}
 

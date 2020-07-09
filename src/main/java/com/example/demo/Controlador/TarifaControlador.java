@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.Modelo.Tarifa;
+import com.example.demo.Modelo.TarifaKey;
 import com.example.demo.Repository.TarifaRepositorio;
 
 @RestController
@@ -22,6 +23,7 @@ import com.example.demo.Repository.TarifaRepositorio;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.DELETE,
 		RequestMethod.POST, RequestMethod.PUT })
 public class TarifaControlador {
+	
 	@Autowired
 	TarifaRepositorio tarifaRepositorio;
 
@@ -31,7 +33,7 @@ public class TarifaControlador {
 	}
 
 	@GetMapping("/{id}")
-	public Tarifa getById(@PathVariable(value = "id") Integer id) {
+	public Tarifa getById(@PathVariable(value = "id") TarifaKey id) {
 		return tarifaRepositorio.findById(id).orElseGet(() -> {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "tarifa de Envios no encontrada");
 		});
@@ -48,7 +50,7 @@ public class TarifaControlador {
 	}
 
 	@DeleteMapping("/{id}")
-	public void borrar(@PathVariable(value = "id") Integer id) {
+	public void borrar(@PathVariable(value = "id") TarifaKey id) {
 		if (tarifaRepositorio.findById(id).isPresent()) {
 			tarifaRepositorio.delete(tarifaRepositorio.findById(id).get());
 		} else {
