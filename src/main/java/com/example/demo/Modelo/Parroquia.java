@@ -21,20 +21,26 @@ public class Parroquia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_parroquia")
-	private Long idParroquia;
+	private int idParroquia;
 	@Column(name = "nombre_parroquia", length = 50)
 	private String nombreParroquia;
 
-	@OneToMany(mappedBy = "empresaEnvios")
+	@OneToMany(mappedBy = "parroquia")
 	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
 
 //	@ManyToMany
 //	@JoinTable(name = "tarifa", joinColumns = @JoinColumn(name = "id_parroquia"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
 //	Set<EmpresaEnvios> empresasEnlazadas;
 
-
 	public Parroquia() {
 		super();
+	}
+
+	public Parroquia(int idParroquia, String nombreParroquia, Set<Tarifa> tarifas) {
+		super();
+		this.idParroquia = idParroquia;
+		this.nombreParroquia = nombreParroquia;
+		this.tarifas = tarifas;
 	}
 
 	public Parroquia(String nombreParroquia) {
@@ -42,11 +48,11 @@ public class Parroquia {
 		this.nombreParroquia = nombreParroquia;
 	}
 
-	public Long getIdParroquia() {
+	public int getIdParroquia() {
 		return idParroquia;
 	}
 
-	public void setIdParroquia(Long idParroquia) {
+	public void setIdParroquia(int idParroquia) {
 		this.idParroquia = idParroquia;
 	}
 
@@ -58,11 +64,19 @@ public class Parroquia {
 		this.nombreParroquia = nombreParroquia;
 	}
 
+	public Set<Tarifa> getTarifas() {
+		return tarifas;
+	}
+
+	public void setTarifas(Set<Tarifa> tarifas) {
+		this.tarifas = tarifas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idParroquia == null) ? 0 : idParroquia.hashCode());
+		result = prime * result + idParroquia;
 		result = prime * result + ((nombreParroquia == null) ? 0 : nombreParroquia.hashCode());
 		result = prime * result + ((tarifas == null) ? 0 : tarifas.hashCode());
 		return result;
@@ -77,10 +91,7 @@ public class Parroquia {
 		if (getClass() != obj.getClass())
 			return false;
 		Parroquia other = (Parroquia) obj;
-		if (idParroquia == null) {
-			if (other.idParroquia != null)
-				return false;
-		} else if (!idParroquia.equals(other.idParroquia))
+		if (idParroquia != other.idParroquia)
 			return false;
 		if (nombreParroquia == null) {
 			if (other.nombreParroquia != null)
@@ -94,7 +105,6 @@ public class Parroquia {
 			return false;
 		return true;
 	}
-
 }
 
 //CREATE TABLE "parroquia" (

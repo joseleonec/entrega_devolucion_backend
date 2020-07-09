@@ -9,32 +9,32 @@ import javax.persistence.Embeddable;
 public class TarifaKey implements Serializable{
 
 	@Column(name = "id_parroquia")
-	private Long idParroquia;
+	private int idParroquia;
 
 	@Column(name = "id_empresa")
-	private Long idEmpresa;
+	private int idEmpresa;
 	
 	public TarifaKey() {}
 	
-	public TarifaKey(Long idParroquia, Long idEmpresa) {
+	public TarifaKey(int idParroquia, int idEmpresa) {
 		super();
 		this.idParroquia = idParroquia;
 		this.idEmpresa = idEmpresa;
 	}
 
-	public Long getIdParroquia() {
+	public int getIdParroquia() {
 		return idParroquia;
 	}
 
-	public void setIdParroquia(Long idParroquia) {
+	public void setIdParroquia(int idParroquia) {
 		this.idParroquia = idParroquia;
 	}
 
-	public Long getIdEmpresa() {
+	public int getIdEmpresa() {
 		return idEmpresa;
 	}
 
-	public void setIdEmpresa(Long idEmpresa) {
+	public void setIdEmpresa(int idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
 
@@ -42,8 +42,8 @@ public class TarifaKey implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idEmpresa == null) ? 0 : idEmpresa.hashCode());
-		result = prime * result + ((idParroquia == null) ? 0 : idParroquia.hashCode());
+		result = prime * result + idEmpresa;
+		result = prime * result + idParroquia;
 		return result;
 	}
 
@@ -56,18 +56,13 @@ public class TarifaKey implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		TarifaKey other = (TarifaKey) obj;
-		if (idEmpresa == null) {
-			if (other.idEmpresa != null)
-				return false;
-		} else if (!idEmpresa.equals(other.idEmpresa))
+		if (idEmpresa != other.idEmpresa)
 			return false;
-		if (idParroquia == null) {
-			if (other.idParroquia != null)
-				return false;
-		} else if (!idParroquia.equals(other.idParroquia))
+		if (idParroquia != other.idParroquia)
 			return false;
 		return true;
 	}
 
+	
 	
 }

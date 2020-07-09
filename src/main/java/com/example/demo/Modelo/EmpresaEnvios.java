@@ -18,7 +18,7 @@ public class EmpresaEnvios {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_empresa")
-	private Long idEmpresa;
+	private int idEmpresa;
 	@Column(name = "razon_social")
 	private String razonSocial;
 	@Column(name = "min_paquetes_por_viaje")
@@ -30,7 +30,7 @@ public class EmpresaEnvios {
 	@Column(name = "maximo_peso_paquete")
 	private double pesoMaximoDelPaquete;
 
-	@OneToMany(mappedBy = "parroquia")
+	@OneToMany(mappedBy = "empresaEnvios")
 	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
 
 	public EmpresaEnvios(String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra, double costoKgExtra,
@@ -43,15 +43,27 @@ public class EmpresaEnvios {
 		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
 	}
 
+	public EmpresaEnvios(int idEmpresa, String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra,
+			double costoKgExtra, double pesoMaximoDelPaquete, Set<Tarifa> tarifas) {
+		super();
+		this.idEmpresa = idEmpresa;
+		this.razonSocial = razonSocial;
+		this.minimoDePaquetesPorViaje = minimoDePaquetesPorViaje;
+		this.costoKmExtra = costoKmExtra;
+		this.costoKgExtra = costoKgExtra;
+		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
+		this.tarifas = tarifas;
+	}
+
 	public EmpresaEnvios() {
 		super();
 	}
 
-	public Long getIdEmpresa() {
+	public int getIdEmpresa() {
 		return idEmpresa;
 	}
 
-	public void setIdEmpresa(Long idEmpresa) {
+	public void setIdEmpresa(int idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
 
@@ -112,7 +124,7 @@ public class EmpresaEnvios {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(costoKmExtra);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((idEmpresa == null) ? 0 : idEmpresa.hashCode());
+		result = prime * result + idEmpresa;
 		result = prime * result + minimoDePaquetesPorViaje;
 		temp = Double.doubleToLongBits(pesoMaximoDelPaquete);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -134,10 +146,7 @@ public class EmpresaEnvios {
 			return false;
 		if (Double.doubleToLongBits(costoKmExtra) != Double.doubleToLongBits(other.costoKmExtra))
 			return false;
-		if (idEmpresa == null) {
-			if (other.idEmpresa != null)
-				return false;
-		} else if (!idEmpresa.equals(other.idEmpresa))
+		if (idEmpresa != other.idEmpresa)
 			return false;
 		if (minimoDePaquetesPorViaje != other.minimoDePaquetesPorViaje)
 			return false;

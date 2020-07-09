@@ -1,7 +1,6 @@
 package com.example.demo.Modelo;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 public class Tarifa {
 
 	@EmbeddedId
-	private TarifaKey id;
+	private TarifaKey id= new TarifaKey();
 
 	@ManyToOne
 	@MapsId("idParroquia") // nombre del atributo de la clase Parroquia
@@ -86,6 +85,22 @@ public class Tarifa {
 
 	public void setEmpresaEnvios(EmpresaEnvios empresaEnvios) {
 		this.empresaEnvios = empresaEnvios;
+	}
+
+	public double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
+	}
+
+	public double getMinutosEstimados() {
+		return minutosEstimados;
+	}
+
+	public void setMinutosEstimados(double minutosEstimados) {
+		this.minutosEstimados = minutosEstimados;
 	}
 
 	@Override
