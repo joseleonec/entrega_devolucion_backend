@@ -1,4 +1,4 @@
-package com.example.demo.Modelo;
+package com.example.demo.modelo;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,14 +28,26 @@ public class EntregaADomicilo {
 	@Column(name = "id_factura")
 	private Long idFactura;
 
-	@Column(name ="prioridad")
+	@Column(name = "prioridad")
 	private int prioridad;
-	
+
 	@Column(length = 10)
 	private String estado;
 
 	@Column(name = "peso_kg")
 	private double pesoKg;
+
+	public EntregaADomicilo(Long idEntregaDomicilio, Long idUbicacion, Long idEmpresa, Long idFactura, int prioridad,
+			String estado, double pesoKg) {
+		super();
+		this.idEntregaDomicilio = idEntregaDomicilio;
+		this.idUbicacion = idUbicacion;
+		this.idEmpresa = idEmpresa;
+		this.idFactura = idFactura;
+		this.prioridad = prioridad;
+		this.estado = estado;
+		this.pesoKg = pesoKg;
+	}
 
 //	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    private EmpresaEnvios empresaEnvios;

@@ -14,47 +14,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.modelo.EmpresaEnvios;
-import com.example.demo.repository.EmpresaEnviosRepositorio;
-
+import com.example.demo.modelo.EntregaADomicilo;
+import com.example.demo.repository.EntregaADomiciloRepositorio;
 
 @RestController
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/entregadomicilio")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.DELETE,
 		RequestMethod.POST, RequestMethod.PUT })
-public class EmpresaEnviosControlador {
-	
+public class EntregaADomiciloControlador {
+
 	@Autowired
-	EmpresaEnviosRepositorio empresaEnviosRepositorio;
+	EntregaADomiciloRepositorio entregaADomiciloRepositorio;
 	
 	@GetMapping
-	public Iterable<EmpresaEnvios> getAll(){
-		return empresaEnviosRepositorio.findAll();
+	public Iterable<EntregaADomicilo> getAll(){
+		return entregaADomiciloRepositorio.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public EmpresaEnvios getById(@PathVariable(value = "id") Integer id) {
-		return empresaEnviosRepositorio.findById(id).orElseGet( () ->{
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa de Envios no encontrada");			
+	public EntregaADomicilo getById(@PathVariable(value = "id") Integer id) {
+		return entregaADomiciloRepositorio.findById(id).orElseGet( () ->{
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "entregaADomicilo no encontrada");			
 		});
 	}
 	
 	@PostMapping
-	public EmpresaEnvios guardar(@RequestBody EmpresaEnvios empresa) {
-		return empresaEnviosRepositorio.save(empresa);
+	public EntregaADomicilo guardar(@RequestBody EntregaADomicilo entregaADomicilo) {
+		return entregaADomiciloRepositorio.save(entregaADomicilo);
 	}
 	
 	@PutMapping
-	public EmpresaEnvios update(@RequestBody EmpresaEnvios empresa) {
-		return empresaEnviosRepositorio.save(empresa);
+	public EntregaADomicilo update(@RequestBody EntregaADomicilo entregaADomicilo) {
+		return entregaADomiciloRepositorio.save(entregaADomicilo);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void borrar(@PathVariable(value = "id") Integer id) {
-		if (empresaEnviosRepositorio.findById(id).isPresent()) {
-			empresaEnviosRepositorio.delete(empresaEnviosRepositorio.findById(id).get());
+		if (entregaADomiciloRepositorio.findById(id).isPresent()) {
+			entregaADomiciloRepositorio.delete(entregaADomiciloRepositorio.findById(id).get());
 		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa de Envios no encontrada");	
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "entregaADomicilo no encontrada");	
 		}
 	}	
 }

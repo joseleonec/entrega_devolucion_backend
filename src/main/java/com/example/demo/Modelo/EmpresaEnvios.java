@@ -1,4 +1,4 @@
-package com.example.demo.Modelo;
+package com.example.demo.modelo;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,15 +39,15 @@ public class EmpresaEnvios {
 	@Column(name = "maximo_peso_paquete")
 	private double pesoMaximoDelPaquete;
 
-	@JoinTable(name = "tarifa", 
-			joinColumns = @JoinColumn(name = "id_empresa", nullable = false), 
-			inverseJoinColumns = @JoinColumn(name = "id_parroquia", nullable = false)
-	)
-	@ManyToMany
-	private Set<Parroquia> parroquias = new HashSet<Parroquia>();
-
-	@OneToMany(mappedBy = "parroquia")
-	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
+//	@JoinTable(name = "tarifa", 
+//			joinColumns = @JoinColumn(name = "id_empresa", nullable = false), 
+//			inverseJoinColumns = @JoinColumn(name = "id_parroquia", nullable = false)
+//	)
+//	@ManyToMany
+//	private Set<Parroquia> parroquias = new HashSet<Parroquia>();
+//
+//	@OneToMany(mappedBy = "parroquia")
+//	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
 
 	public EmpresaEnvios(String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra, double costoKgExtra,
 			double pesoMaximoDelPaquete) {
@@ -60,7 +60,7 @@ public class EmpresaEnvios {
 	}
 
 	public EmpresaEnvios(int idEmpresa, String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra,
-			double costoKgExtra, double pesoMaximoDelPaquete, Set<Tarifa> tarifas) {
+			double costoKgExtra, double pesoMaximoDelPaquete) {
 		super();
 		this.idEmpresa = idEmpresa;
 		this.razonSocial = razonSocial;
@@ -68,7 +68,7 @@ public class EmpresaEnvios {
 		this.costoKmExtra = costoKmExtra;
 		this.costoKgExtra = costoKgExtra;
 		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
-		this.tarifas = tarifas;
+//		this.tarifas = tarifas;
 	}
 
 	public EmpresaEnvios() {
@@ -123,13 +123,13 @@ public class EmpresaEnvios {
 		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
 	}
 
-	public Set<Tarifa> getTarifas() {
-		return tarifas;
-	}
-
-	public void setTarifas(Set<Tarifa> tarifas) {
-		this.tarifas = tarifas;
-	}
+//	public Set<Tarifa> getTarifas() {
+//		return tarifas;
+//	}
+//
+//	public void setTarifas(Set<Tarifa> tarifas) {
+//		this.tarifas = tarifas;
+//	}
 
 	@Override
 	public int hashCode() {

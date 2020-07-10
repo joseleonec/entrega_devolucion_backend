@@ -1,4 +1,4 @@
-package com.example.demo.Modelo;
+package com.example.demo.modelo;
 
 import java.util.Calendar;
 
@@ -39,4 +39,127 @@ public class SolicitudDevolucion {
 	@Column(name = "estado_aprobacion", nullable = false, length = 10)
 	private String estadoAprobacion;
 
+	public SolicitudDevolucion(int idSolicitud, int idProducto, int idFactura, int idCliente, Calendar fechaDeRegistro,
+			String motivoDevolucion, String estadoAprobacion) {
+		super();
+		this.idSolicitud = idSolicitud;
+		this.idProducto = idProducto;
+		this.idFactura = idFactura;
+		this.idCliente = idCliente;
+		this.fechaDeRegistro = fechaDeRegistro;
+		this.motivoDevolucion = motivoDevolucion;
+		this.estadoAprobacion = estadoAprobacion;
+	}
+
+	public SolicitudDevolucion() {
+		super();
+	}
+
+	public int getIdSolicitud() {
+		return idSolicitud;
+	}
+
+	public void setIdSolicitud(int idSolicitud) {
+		this.idSolicitud = idSolicitud;
+	}
+
+	public int getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public int getIdFactura() {
+		return idFactura;
+	}
+
+	public void setIdFactura(int idFactura) {
+		this.idFactura = idFactura;
+	}
+
+	public int getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public Calendar getFechaDeRegistro() {
+		return fechaDeRegistro;
+	}
+
+	public void setFechaDeRegistro(Calendar fechaDeRegistro) {
+		this.fechaDeRegistro = fechaDeRegistro;
+	}
+
+	public String getMotivoDevolucion() {
+		return motivoDevolucion;
+	}
+
+	public void setMotivoDevolucion(String motivoDevolucion) {
+		this.motivoDevolucion = motivoDevolucion;
+	}
+
+	public String getEstadoAprobacion() {
+		return estadoAprobacion;
+	}
+
+	public void setEstadoAprobacion(String estadoAprobacion) {
+		this.estadoAprobacion = estadoAprobacion;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((estadoAprobacion == null) ? 0 : estadoAprobacion.hashCode());
+		result = prime * result + ((fechaDeRegistro == null) ? 0 : fechaDeRegistro.hashCode());
+		result = prime * result + idCliente;
+		result = prime * result + idFactura;
+		result = prime * result + idProducto;
+		result = prime * result + idSolicitud;
+		result = prime * result + ((motivoDevolucion == null) ? 0 : motivoDevolucion.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SolicitudDevolucion other = (SolicitudDevolucion) obj;
+		if (estadoAprobacion == null) {
+			if (other.estadoAprobacion != null)
+				return false;
+		} else if (!estadoAprobacion.equals(other.estadoAprobacion))
+			return false;
+		if (fechaDeRegistro == null) {
+			if (other.fechaDeRegistro != null)
+				return false;
+		} else if (!fechaDeRegistro.equals(other.fechaDeRegistro))
+			return false;
+		if (idCliente != other.idCliente)
+			return false;
+		if (idFactura != other.idFactura)
+			return false;
+		if (idProducto != other.idProducto)
+			return false;
+		if (idSolicitud != other.idSolicitud)
+			return false;
+		if (motivoDevolucion == null) {
+			if (other.motivoDevolucion != null)
+				return false;
+		} else if (!motivoDevolucion.equals(other.motivoDevolucion))
+			return false;
+		return true;
+	}
+
+	
+	
 }

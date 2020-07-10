@@ -1,4 +1,4 @@
-package com.example.demo.Modelo;
+package com.example.demo.modelo;
 
 import java.io.Serializable;
 
@@ -15,31 +15,37 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tarifa")
-public class Tarifa implements Serializable {
+public class Tarifa {
 
-	private static final long serialVersionUID = 1L;
 
 //	@EmbeddedId
 //	private TarifaKey idTarifa;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="id_tarifa")
+	@Column(name = "id_tarifa")
 	private int idTarifa;
-	
-	@ManyToOne
-	@MapsId("idEmpresa") // nombre del atributo de la clase EmpresaEnvios
-	@JoinColumn(name = "id_empresa")
-	private EmpresaEnvios empresaEnvios;
-	
-	@ManyToOne
-	@MapsId("idParroquia") // nombre del atributo de la clase Parroquia
-	@JoinColumn(name = "id_parroquia")
-	private Parroquia parroquia;
+
+	@Column(name = "id_parroquia")
+	private int idParroquia;
+
+	@Column(name = "id_empresa")
+	private int idEmpresa;
 
 	@Column(name = "costo")
 	private double costo;
+
 	@Column(name = "minutos_estimados")
 	private double minutosEstimados;
+	
+//	@ManyToOne
+//	@MapsId("idEmpresa") // nombre del atributo de la clase EmpresaEnvios
+//	@JoinColumn(name = "id_empresa")
+//	private EmpresaEnvios empresaEnvios;
+//	
+//	@ManyToOne
+//	@MapsId("idParroquia") // nombre del atributo de la clase Parroquia
+//	@JoinColumn(name = "id_parroquia")
+//	private Parroquia parroquia;
 
 //	public Tarifa(TarifaKey idTarifa, Parroquia parroquia, EmpresaEnvios empresaEnvios, double costo,
 //			double minutosEstimados) {
@@ -50,6 +56,15 @@ public class Tarifa implements Serializable {
 //		this.costo = costo;
 //		this.minutosEstimados = minutosEstimados;
 //	}
+
+	public Tarifa(int idTarifa, int idParroquia, int idEmpresa, double costo, double minutosEstimados) {
+		super();
+		this.idTarifa = idTarifa;
+		this.idParroquia = idParroquia;
+		this.idEmpresa = idEmpresa;
+		this.costo = costo;
+		this.minutosEstimados = minutosEstimados;
+	}
 
 	public Tarifa() {
 		super();
@@ -63,21 +78,21 @@ public class Tarifa implements Serializable {
 //		this.idTarifa = idTarifa;
 //	}
 
-	public Parroquia getParroquia() {
-		return parroquia;
-	}
-
-	public void setParroquia(Parroquia parroquia) {
-		this.parroquia = parroquia;
-	}
-
-	public EmpresaEnvios getEmpresaEnvios() {
-		return empresaEnvios;
-	}
-
-	public void setEmpresaEnvios(EmpresaEnvios empresaEnvios) {
-		this.empresaEnvios = empresaEnvios;
-	}
+//	public Parroquia getParroquia() {
+//		return parroquia;
+//	}
+//
+//	public void setParroquia(Parroquia parroquia) {
+//		this.parroquia = parroquia;
+//	}
+//
+//	public EmpresaEnvios getEmpresaEnvios() {
+//		return empresaEnvios;
+//	}
+//
+//	public void setEmpresaEnvios(EmpresaEnvios empresaEnvios) {
+//		this.empresaEnvios = empresaEnvios;
+//	}
 
 	public double getCosto() {
 		return costo;
@@ -95,13 +110,42 @@ public class Tarifa implements Serializable {
 		this.minutosEstimados = minutosEstimados;
 	}
 
+	public int getIdTarifa() {
+		return idTarifa;
+	}
+
+	public void setIdTarifa(int idTarifa) {
+		this.idTarifa = idTarifa;
+	}
+
+	public int getIdParroquia() {
+		return idParroquia;
+	}
+
+	public void setIdParroquia(int idParroquia) {
+		this.idParroquia = idParroquia;
+	}
+
+	public int getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(int idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((empresaEnvios == null) ? 0 : empresaEnvios.hashCode());
-//		result = prime * result + ((idTarifa == null) ? 0 : idTarifa.hashCode());
-		result = prime * result + ((parroquia == null) ? 0 : parroquia.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(costo);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + idEmpresa;
+		result = prime * result + idParroquia;
+		result = prime * result + idTarifa;
+		temp = Double.doubleToLongBits(minutosEstimados);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -114,20 +158,15 @@ public class Tarifa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Tarifa other = (Tarifa) obj;
-		if (empresaEnvios == null) {
-			if (other.empresaEnvios != null)
-				return false;
-		} else if (!empresaEnvios.equals(other.empresaEnvios))
+		if (Double.doubleToLongBits(costo) != Double.doubleToLongBits(other.costo))
 			return false;
-//		if (idTarifa == null) {
-//			if (other.idTarifa != null)
-//				return false;
-//		} else if (!idTarifa.equals(other.idTarifa))
-//			return false;
-		if (parroquia == null) {
-			if (other.parroquia != null)
-				return false;
-		} else if (!parroquia.equals(other.parroquia))
+		if (idEmpresa != other.idEmpresa)
+			return false;
+		if (idParroquia != other.idParroquia)
+			return false;
+		if (idTarifa != other.idTarifa)
+			return false;
+		if (Double.doubleToLongBits(minutosEstimados) != Double.doubleToLongBits(other.minutosEstimados))
 			return false;
 		return true;
 	}

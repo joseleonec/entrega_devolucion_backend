@@ -14,47 +14,48 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.modelo.EmpresaEnvios;
-import com.example.demo.repository.EmpresaEnviosRepositorio;
-
+import com.example.demo.modelo.NotaDeCredito;
+import com.example.demo.repository.NotaDeCreditoRepositorio;
 
 @RestController
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/notadecredito")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.DELETE,
 		RequestMethod.POST, RequestMethod.PUT })
-public class EmpresaEnviosControlador {
+public class NotaDeCreditoControlador {
 	
+
 	@Autowired
-	EmpresaEnviosRepositorio empresaEnviosRepositorio;
+	NotaDeCreditoRepositorio notaDeCreditoRepositorio;
 	
 	@GetMapping
-	public Iterable<EmpresaEnvios> getAll(){
-		return empresaEnviosRepositorio.findAll();
+	public Iterable<NotaDeCredito> getAll(){
+		return notaDeCreditoRepositorio.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public EmpresaEnvios getById(@PathVariable(value = "id") Integer id) {
-		return empresaEnviosRepositorio.findById(id).orElseGet( () ->{
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa de Envios no encontrada");			
+	public NotaDeCredito getById(@PathVariable(value = "id") Integer id) {
+		return notaDeCreditoRepositorio.findById(id).orElseGet( () ->{
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "NotaDeCredito no encontrada");			
 		});
 	}
 	
 	@PostMapping
-	public EmpresaEnvios guardar(@RequestBody EmpresaEnvios empresa) {
-		return empresaEnviosRepositorio.save(empresa);
+	public NotaDeCredito guardar(@RequestBody NotaDeCredito notaDeCredito) {
+		return notaDeCreditoRepositorio.save(notaDeCredito);
 	}
 	
 	@PutMapping
-	public EmpresaEnvios update(@RequestBody EmpresaEnvios empresa) {
-		return empresaEnviosRepositorio.save(empresa);
+	public NotaDeCredito update(@RequestBody NotaDeCredito notaDeCredito) {
+		return notaDeCreditoRepositorio.save(notaDeCredito);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void borrar(@PathVariable(value = "id") Integer id) {
-		if (empresaEnviosRepositorio.findById(id).isPresent()) {
-			empresaEnviosRepositorio.delete(empresaEnviosRepositorio.findById(id).get());
+		if (notaDeCreditoRepositorio.findById(id).isPresent()) {
+			notaDeCreditoRepositorio.delete(notaDeCreditoRepositorio.findById(id).get());
 		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa de Envios no encontrada");	
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "NotaDeCredito no encontrada");	
 		}
 	}	
+
 }

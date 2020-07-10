@@ -14,47 +14,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.modelo.EmpresaEnvios;
-import com.example.demo.repository.EmpresaEnviosRepositorio;
-
+import com.example.demo.modelo.EntregaEnBodega;
+import com.example.demo.repository.EntregaEnBodegaRepositorio;
 
 @RestController
-@RequestMapping("/api/empresa")
+@RequestMapping("/api/entregaenbodega")
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.DELETE,
 		RequestMethod.POST, RequestMethod.PUT })
-public class EmpresaEnviosControlador {
-	
+public class EntregaEnBodegaControlador {
 	@Autowired
-	EmpresaEnviosRepositorio empresaEnviosRepositorio;
-	
+	EntregaEnBodegaRepositorio entregaEnBodegaRepositorio;
+
 	@GetMapping
-	public Iterable<EmpresaEnvios> getAll(){
-		return empresaEnviosRepositorio.findAll();
+	public Iterable<EntregaEnBodega> getAll() {
+		return entregaEnBodegaRepositorio.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
-	public EmpresaEnvios getById(@PathVariable(value = "id") Integer id) {
-		return empresaEnviosRepositorio.findById(id).orElseGet( () ->{
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa de Envios no encontrada");			
+	public EntregaEnBodega getById(@PathVariable(value = "id") Integer id) {
+		return entregaEnBodegaRepositorio.findById(id).orElseGet(() -> {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EntregaEnBodega no encontrada");
 		});
 	}
-	
+
 	@PostMapping
-	public EmpresaEnvios guardar(@RequestBody EmpresaEnvios empresa) {
-		return empresaEnviosRepositorio.save(empresa);
+	public EntregaEnBodega guardar(@RequestBody EntregaEnBodega EntregaEnBodega) {
+		return entregaEnBodegaRepositorio.save(EntregaEnBodega);
 	}
-	
+
 	@PutMapping
-	public EmpresaEnvios update(@RequestBody EmpresaEnvios empresa) {
-		return empresaEnviosRepositorio.save(empresa);
+	public EntregaEnBodega update(@RequestBody EntregaEnBodega EntregaEnBodega) {
+		return entregaEnBodegaRepositorio.save(EntregaEnBodega);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void borrar(@PathVariable(value = "id") Integer id) {
-		if (empresaEnviosRepositorio.findById(id).isPresent()) {
-			empresaEnviosRepositorio.delete(empresaEnviosRepositorio.findById(id).get());
+		if (entregaEnBodegaRepositorio.findById(id).isPresent()) {
+			entregaEnBodegaRepositorio.delete(entregaEnBodegaRepositorio.findById(id).get());
 		} else {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empresa de Envios no encontrada");	
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EntregaEnBodega no encontrada");
 		}
-	}	
+	}
 }

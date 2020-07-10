@@ -1,4 +1,4 @@
-package com.example.demo.Controlador;
+package com.example.demo.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.Modelo.Parroquia;
-import com.example.demo.Repository.ParroquiaRepositorio;
+import com.example.demo.modelo.Parroquia;
+import com.example.demo.repository.ParroquiaRepositorio;
 
 @RestController
 @RequestMapping("/api/parroquia")

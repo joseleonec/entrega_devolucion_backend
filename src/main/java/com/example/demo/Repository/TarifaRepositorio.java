@@ -1,10 +1,9 @@
-package com.example.demo.Repository;
+package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.Modelo.Tarifa;
-import com.example.demo.Modelo.TarifaKey;
+import com.example.demo.modelo.Tarifa;
 
-public interface TarifaRepositorio extends JpaRepository<Tarifa, TarifaKey> {
+public interface TarifaRepositorio extends JpaRepository<Tarifa, Integer> {
 
 }

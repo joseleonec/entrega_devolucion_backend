@@ -1,4 +1,4 @@
-package com.example.demo.Modelo;
+package com.example.demo.modelo;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -28,15 +28,15 @@ public class Parroquia {
 	@Column(name = "nombre_parroquia", length = 50)
 	private String nombreParroquia;
 	
-	@OneToMany(mappedBy = "empresaEnvios")
-	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
-	
-	public void AddTarifa(Tarifa tarifa) {
-        if(this.tarifas == null){
-            this.tarifas = new HashSet<>();
-        }
-        this.tarifas.add(tarifa);
-	}
+//	@OneToMany(mappedBy = "empresaEnvios")
+//	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
+//	
+//	public void AddTarifa(Tarifa tarifa) {
+//        if(this.tarifas == null){
+//            this.tarifas = new HashSet<>();
+//        }
+//        this.tarifas.add(tarifa);
+//	}
 	
 //	@ManyToMany
 //	@JoinTable(name = "tarifa", joinColumns = @JoinColumn(name = "id_parroquia"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
@@ -46,11 +46,11 @@ public class Parroquia {
 		super();
 	}
 
-	public Parroquia(int idParroquia, String nombreParroquia, Set<Tarifa> tarifas) {
+	public Parroquia(int idParroquia, String nombreParroquia) {
 		super();
 		this.idParroquia = idParroquia;
 		this.nombreParroquia = nombreParroquia;
-		this.tarifas = tarifas;
+//		this.tarifas = tarifas;
 	}
 
 	public Parroquia(String nombreParroquia) {
@@ -74,13 +74,13 @@ public class Parroquia {
 		this.nombreParroquia = nombreParroquia;
 	}
 
-	public Set<Tarifa> getTarifas() {
-		return tarifas;
-	}
-
-	public void setTarifas(Set<Tarifa> tarifas) {
-		this.tarifas = tarifas;
-	}
+//	public Set<Tarifa> getTarifas() {
+//		return tarifas;
+//	}
+//
+//	public void setTarifas(Set<Tarifa> tarifas) {
+//		this.tarifas = tarifas;
+//	}
 
 	@Override
 	public int hashCode() {
@@ -88,7 +88,7 @@ public class Parroquia {
 		int result = 1;
 		result = prime * result + idParroquia;
 		result = prime * result + ((nombreParroquia == null) ? 0 : nombreParroquia.hashCode());
-		result = prime * result + ((tarifas == null) ? 0 : tarifas.hashCode());
+//		result = prime * result + ((tarifas == null) ? 0 : tarifas.hashCode());
 		return result;
 	}
 
@@ -108,11 +108,11 @@ public class Parroquia {
 				return false;
 		} else if (!nombreParroquia.equals(other.nombreParroquia))
 			return false;
-		if (tarifas == null) {
-			if (other.tarifas != null)
-				return false;
-		} else if (!tarifas.equals(other.tarifas))
-			return false;
+//		if (tarifas == null) {
+//			if (other.tarifas != null)
+//				return false;
+//		} else if (!tarifas.equals(other.tarifas))
+//			return false;
 		return true;
 	}
 }

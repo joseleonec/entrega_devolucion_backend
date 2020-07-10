@@ -1,3 +1,4 @@
+package com.example.demo.modelo;
 //package com.example.demo.Modelo;
 //
 //import javax.persistence.Column;
