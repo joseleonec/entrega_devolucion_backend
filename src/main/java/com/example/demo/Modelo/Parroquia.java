@@ -2,6 +2,7 @@ package com.example.demo.modelo;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,6 +28,14 @@ public class Parroquia {
 	
 	@Column(name = "nombre_parroquia", length = 50)
 	private String nombreParroquia;
+	
+	@OneToMany(mappedBy="parroquia")
+	private List<Tarifa> tarifas;
+	
+	public void addTarifa(Tarifa tarifa) {
+	    tarifa.setParroquia(this);
+	    this.tarifas.add(tarifa);
+	}
 	
 //	@OneToMany(mappedBy = "empresaEnvios")
 //	private Set<Tarifa> tarifas = new HashSet<Tarifa>();

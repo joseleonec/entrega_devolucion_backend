@@ -1,6 +1,7 @@
 package com.example.demo.modelo;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,6 +39,15 @@ public class EmpresaEnvios {
 	
 	@Column(name = "maximo_peso_paquete")
 	private double pesoMaximoDelPaquete;
+	
+	@OneToMany(mappedBy="empresa")
+	private List<Tarifa> tarifas;
+	
+	public void addTarifa(Tarifa tarifa) {
+	    tarifa.setEmpresa(this);
+	    this.tarifas.add(tarifa);
+	}
+	
 
 //	@JoinTable(name = "tarifa", 
 //			joinColumns = @JoinColumn(name = "id_empresa", nullable = false), 

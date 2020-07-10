@@ -26,6 +26,11 @@ public class NotaDeCredito {
 	@Column(name = "autorizacion_SRI", nullable = false)
 	private int autorizacionSRI;
 
+	
+	public NotaDeCredito() {
+		super();
+	}
+
 	public NotaDeCredito(int idNotaDeCredito, int idSolicitud, double monto, int autorizacionSRI) {
 		super();
 		this.idNotaDeCredito = idNotaDeCredito;

@@ -1,6 +1,7 @@
 package com.example.demo.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -11,128 +12,87 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tarifa")
 public class Tarifa {
 
-
-//	@EmbeddedId
-//	private TarifaKey idTarifa;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_tarifa")
 	private int idTarifa;
-
-	@Column(name = "id_parroquia")
-	private int idParroquia;
-
-	@Column(name = "id_empresa")
-	private int idEmpresa;
-
+	
 	@Column(name = "costo")
 	private double costo;
 
 	@Column(name = "minutos_estimados")
 	private double minutosEstimados;
 	
-//	@ManyToOne
-//	@MapsId("idEmpresa") // nombre del atributo de la clase EmpresaEnvios
-//	@JoinColumn(name = "id_empresa")
-//	private EmpresaEnvios empresaEnvios;
-//	
-//	@ManyToOne
-//	@MapsId("idParroquia") // nombre del atributo de la clase Parroquia
-//	@JoinColumn(name = "id_parroquia")
-//	private Parroquia parroquia;
-
-//	public Tarifa(TarifaKey idTarifa, Parroquia parroquia, EmpresaEnvios empresaEnvios, double costo,
-//			double minutosEstimados) {
-//		super();
-//		this.idTarifa = idTarifa;
-//		this.parroquia = parroquia;
-//		this.empresaEnvios = empresaEnvios;
-//		this.costo = costo;
-//		this.minutosEstimados = minutosEstimados;
-//	}
-
-	public Tarifa(int idTarifa, int idParroquia, int idEmpresa, double costo, double minutosEstimados) {
-		super();
-		this.idTarifa = idTarifa;
-		this.idParroquia = idParroquia;
-		this.idEmpresa = idEmpresa;
-		this.costo = costo;
-		this.minutosEstimados = minutosEstimados;
-	}
+    @ManyToOne
+    @JoinColumn(name="id_parroquia")
+	private Parroquia parroquia;
+    
+    @ManyToOne
+    @JoinColumn(name="id_empresa")
+	private EmpresaEnvios empresa;
+    
 
 	public Tarifa() {
 		super();
 	}
 
-//	public TarifaKey getIdTarifa() {
-//		return idTarifa;
-//	}
-//
-//	public void setIdTarifa(TarifaKey idTarifa) {
-//		this.idTarifa = idTarifa;
-//	}
-
-//	public Parroquia getParroquia() {
-//		return parroquia;
-//	}
-//
-//	public void setParroquia(Parroquia parroquia) {
-//		this.parroquia = parroquia;
-//	}
-//
-//	public EmpresaEnvios getEmpresaEnvios() {
-//		return empresaEnvios;
-//	}
-//
-//	public void setEmpresaEnvios(EmpresaEnvios empresaEnvios) {
-//		this.empresaEnvios = empresaEnvios;
-//	}
-
-	public double getCosto() {
-		return costo;
-	}
-
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
-
-	public double getMinutosEstimados() {
-		return minutosEstimados;
-	}
-
-	public void setMinutosEstimados(double minutosEstimados) {
-		this.minutosEstimados = minutosEstimados;
-	}
 
 	public int getIdTarifa() {
 		return idTarifa;
 	}
 
+
 	public void setIdTarifa(int idTarifa) {
 		this.idTarifa = idTarifa;
 	}
 
-	public int getIdParroquia() {
-		return idParroquia;
+
+	public double getCosto() {
+		return costo;
 	}
 
-	public void setIdParroquia(int idParroquia) {
-		this.idParroquia = idParroquia;
+
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
 
-	public int getIdEmpresa() {
-		return idEmpresa;
+
+	public double getMinutosEstimados() {
+		return minutosEstimados;
 	}
 
-	public void setIdEmpresa(int idEmpresa) {
-		this.idEmpresa = idEmpresa;
+
+	public void setMinutosEstimados(double minutosEstimados) {
+		this.minutosEstimados = minutosEstimados;
 	}
+
+
+	public Parroquia getParroquia() {
+		return parroquia;
+	}
+
+
+	public void setParroquia(Parroquia parroquia) {
+		this.parroquia = parroquia;
+	}
+
+
+	public EmpresaEnvios getEmpresa() {
+		return empresa;
+	}
+
+
+	public void setEmpresa(EmpresaEnvios empresa) {
+		this.empresa = empresa;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -141,13 +101,14 @@ public class Tarifa {
 		long temp;
 		temp = Double.doubleToLongBits(costo);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + idEmpresa;
-		result = prime * result + idParroquia;
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + idTarifa;
 		temp = Double.doubleToLongBits(minutosEstimados);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((parroquia == null) ? 0 : parroquia.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -160,15 +121,24 @@ public class Tarifa {
 		Tarifa other = (Tarifa) obj;
 		if (Double.doubleToLongBits(costo) != Double.doubleToLongBits(other.costo))
 			return false;
-		if (idEmpresa != other.idEmpresa)
-			return false;
-		if (idParroquia != other.idParroquia)
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (idTarifa != other.idTarifa)
 			return false;
 		if (Double.doubleToLongBits(minutosEstimados) != Double.doubleToLongBits(other.minutosEstimados))
 			return false;
+		if (parroquia == null) {
+			if (other.parroquia != null)
+				return false;
+		} else if (!parroquia.equals(other.parroquia))
+			return false;
 		return true;
 	}
+
+
+
 
 }
