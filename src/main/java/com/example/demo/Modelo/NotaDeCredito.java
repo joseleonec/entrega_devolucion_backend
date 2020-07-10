@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,9 +18,9 @@ public class NotaDeCredito {
 	@Column(name = "id_nota")
 	private int idNotaDeCredito;
 
-	
-	@Column(name = "id_solicitud", nullable = false)
-	private int idSolicitud;
+	@OneToOne
+	@JoinColumn(name = "id_solicitud_aprobada")
+	private SolicitudAprobada solicitudAprobada;
 
 	@Column(name = "monto", nullable = false)
 	private double monto;
@@ -26,17 +28,16 @@ public class NotaDeCredito {
 	@Column(name = "autorizacion_SRI", nullable = false)
 	private int autorizacionSRI;
 
-	
 	public NotaDeCredito() {
 		super();
 	}
 
-	public NotaDeCredito(int idNotaDeCredito, int idSolicitud, double monto, int autorizacionSRI) {
-		super();
-		this.idNotaDeCredito = idNotaDeCredito;
-		this.idSolicitud = idSolicitud;
-		this.monto = monto;
-		this.autorizacionSRI = autorizacionSRI;
+	public SolicitudAprobada getSolicitudAprobada() {
+		return solicitudAprobada;
+	}
+
+	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
+		this.solicitudAprobada = solicitudAprobada;
 	}
 
 	public int getIdNotaDeCredito() {
@@ -45,14 +46,6 @@ public class NotaDeCredito {
 
 	public void setIdNotaDeCredito(int idNotaDeCredito) {
 		this.idNotaDeCredito = idNotaDeCredito;
-	}
-
-	public int getIdSolicitud() {
-		return idSolicitud;
-	}
-
-	public void setIdSolicitud(int idSolicitud) {
-		this.idSolicitud = idSolicitud;
 	}
 
 	public double getMonto() {
@@ -77,7 +70,6 @@ public class NotaDeCredito {
 		int result = 1;
 		result = prime * result + autorizacionSRI;
 		result = prime * result + idNotaDeCredito;
-		result = prime * result + idSolicitud;
 		long temp;
 		temp = Double.doubleToLongBits(monto);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -96,8 +88,6 @@ public class NotaDeCredito {
 		if (autorizacionSRI != other.autorizacionSRI)
 			return false;
 		if (idNotaDeCredito != other.idNotaDeCredito)
-			return false;
-		if (idSolicitud != other.idSolicitud)
 			return false;
 		if (Double.doubleToLongBits(monto) != Double.doubleToLongBits(other.monto))
 			return false;

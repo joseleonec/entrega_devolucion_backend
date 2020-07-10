@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,15 +18,15 @@ public class Sustitucion {
 	@Column(name = "id_sustitucion")
 	private int idSustitucion;
 
-	@Column(name = "id_solicitud", nullable = false)
-	private int idSolicitud;
-	
+	@OneToOne
+	@JoinColumn(name = "id_solicitud_aprobada")
+	private SolicitudAprobada solicitudAprobada;
+
 	@Column(name = "id_producto_sustituto", nullable = false)
 	private double idProductoSustituto;
 
 	@Column(name = "monto", nullable = false)
 	private double monto;
-
 
 	public Sustitucion() {
 		super();
@@ -36,14 +38,6 @@ public class Sustitucion {
 
 	public void setIdSustitucion(int idSustitucion) {
 		this.idSustitucion = idSustitucion;
-	}
-
-	public int getIdSolicitud() {
-		return idSolicitud;
-	}
-
-	public void setIdSolicitud(int idSolicitud) {
-		this.idSolicitud = idSolicitud;
 	}
 
 	public double getMonto() {
@@ -69,7 +63,6 @@ public class Sustitucion {
 		long temp;
 		temp = Double.doubleToLongBits(idProductoSustituto);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + idSolicitud;
 		result = prime * result + idSustitucion;
 		temp = Double.doubleToLongBits(monto);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -87,15 +80,11 @@ public class Sustitucion {
 		Sustitucion other = (Sustitucion) obj;
 		if (Double.doubleToLongBits(idProductoSustituto) != Double.doubleToLongBits(other.idProductoSustituto))
 			return false;
-		if (idSolicitud != other.idSolicitud)
-			return false;
 		if (idSustitucion != other.idSustitucion)
 			return false;
 		if (Double.doubleToLongBits(monto) != Double.doubleToLongBits(other.monto))
 			return false;
 		return true;
 	}
-	
-	
 
 }

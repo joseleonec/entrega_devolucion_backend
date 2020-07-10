@@ -1,12 +1,11 @@
 package com.example.demo.modelo;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,16 +16,17 @@ public class EntregaADomicilo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_entrega_domicilio")
-	private Long idEntregaDomicilio;
+	private int idEntregaDomicilio;
 
 	@Column(name = "id_ubicacion")
-	private Long idUbicacion;
+	private int idUbicacion;
 
-	@Column(name = "id_empresa")
-	private Long idEmpresa;
+    @ManyToOne
+    @JoinColumn(name="id_empresa")
+	private EmpresaEnvios empresa;
 
 	@Column(name = "id_factura")
-	private Long idFactura;
+	private int idFactura;
 
 	@Column(name = "prioridad")
 	private int prioridad;
@@ -37,52 +37,39 @@ public class EntregaADomicilo {
 	@Column(name = "peso_kg")
 	private double pesoKg;
 
-	public EntregaADomicilo(Long idEntregaDomicilio, Long idUbicacion, Long idEmpresa, Long idFactura, int prioridad,
-			String estado, double pesoKg) {
-		super();
-		this.idEntregaDomicilio = idEntregaDomicilio;
-		this.idUbicacion = idUbicacion;
-		this.idEmpresa = idEmpresa;
-		this.idFactura = idFactura;
-		this.prioridad = prioridad;
-		this.estado = estado;
-		this.pesoKg = pesoKg;
-	}
-
 	public EntregaADomicilo() {
 		super();
-
 	}
 
-	public Long getIdEntregaDomicilio() {
+	public int getIdEntregaDomicilio() {
 		return idEntregaDomicilio;
 	}
 
-	public void setIdEntregaDomicilio(Long idEntregaDomicilio) {
+	public void setIdEntregaDomicilio(int idEntregaDomicilio) {
 		this.idEntregaDomicilio = idEntregaDomicilio;
 	}
 
-	public Long getIdUbicacion() {
+	public int getIdUbicacion() {
 		return idUbicacion;
 	}
 
-	public void setIdUbicacion(Long idUbicacion) {
+	public void setIdUbicacion(int idUbicacion) {
 		this.idUbicacion = idUbicacion;
 	}
 
-	public Long getIdEmpresa() {
-		return idEmpresa;
+	public EmpresaEnvios getEmpresa() {
+		return empresa;
 	}
 
-	public void setIdEmpresa(Long idEmpresa) {
-		this.idEmpresa = idEmpresa;
+	public void setEmpresa(EmpresaEnvios empresa) {
+		this.empresa = empresa;
 	}
 
-	public Long getIdFactura() {
+	public int getIdFactura() {
 		return idFactura;
 	}
 
-	public void setIdFactura(Long idFactura) {
+	public void setIdFactura(int idFactura) {
 		this.idFactura = idFactura;
 	}
 
@@ -114,11 +101,11 @@ public class EntregaADomicilo {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
-		result = prime * result + ((idEmpresa == null) ? 0 : idEmpresa.hashCode());
-		result = prime * result + ((idEntregaDomicilio == null) ? 0 : idEntregaDomicilio.hashCode());
-		result = prime * result + ((idFactura == null) ? 0 : idFactura.hashCode());
-		result = prime * result + ((idUbicacion == null) ? 0 : idUbicacion.hashCode());
+		result = prime * result + idEntregaDomicilio;
+		result = prime * result + idFactura;
+		result = prime * result + idUbicacion;
 		long temp;
 		temp = Double.doubleToLongBits(pesoKg);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -135,30 +122,21 @@ public class EntregaADomicilo {
 		if (getClass() != obj.getClass())
 			return false;
 		EntregaADomicilo other = (EntregaADomicilo) obj;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
+			return false;
 		if (estado == null) {
 			if (other.estado != null)
 				return false;
 		} else if (!estado.equals(other.estado))
 			return false;
-		if (idEmpresa == null) {
-			if (other.idEmpresa != null)
-				return false;
-		} else if (!idEmpresa.equals(other.idEmpresa))
+		if (idEntregaDomicilio != other.idEntregaDomicilio)
 			return false;
-		if (idEntregaDomicilio == null) {
-			if (other.idEntregaDomicilio != null)
-				return false;
-		} else if (!idEntregaDomicilio.equals(other.idEntregaDomicilio))
+		if (idFactura != other.idFactura)
 			return false;
-		if (idFactura == null) {
-			if (other.idFactura != null)
-				return false;
-		} else if (!idFactura.equals(other.idFactura))
-			return false;
-		if (idUbicacion == null) {
-			if (other.idUbicacion != null)
-				return false;
-		} else if (!idUbicacion.equals(other.idUbicacion))
+		if (idUbicacion != other.idUbicacion)
 			return false;
 		if (Double.doubleToLongBits(pesoKg) != Double.doubleToLongBits(other.pesoKg))
 			return false;
@@ -167,9 +145,5 @@ public class EntregaADomicilo {
 		return true;
 	}
 
-	
-//	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    private EmpresaEnvios empresaEnvios;
-//	
 
 }

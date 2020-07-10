@@ -1,20 +1,14 @@
 package com.example.demo.modelo;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "empresa_de_envios")
@@ -27,37 +21,34 @@ public class EmpresaEnvios {
 
 	@Column(name = "razon_social")
 	private String razonSocial;
-	
+
 	@Column(name = "min_paquetes_por_viaje")
 	private int minimoDePaquetesPorViaje;
-	
+
 	@Column(name = "costo_km_extra")
 	private double costoKmExtra;
-	
+
 	@Column(name = "costo_kg_extra")
 	private double costoKgExtra;
-	
+
 	@Column(name = "maximo_peso_paquete")
 	private double pesoMaximoDelPaquete;
-	
-	@OneToMany(mappedBy="empresa")
-	private List<Tarifa> tarifas;
-	
-	public void addTarifa(Tarifa tarifa) {
-	    tarifa.setEmpresa(this);
-	    this.tarifas.add(tarifa);
-	}
-	
 
-//	@JoinTable(name = "tarifa", 
-//			joinColumns = @JoinColumn(name = "id_empresa", nullable = false), 
-//			inverseJoinColumns = @JoinColumn(name = "id_parroquia", nullable = false)
-//	)
-//	@ManyToMany
-//	private Set<Parroquia> parroquias = new HashSet<Parroquia>();
-//
-//	@OneToMany(mappedBy = "parroquia")
-//	private Set<Tarifa> tarifas = new HashSet<Tarifa>();
+	@OneToMany(mappedBy = "empresa")
+	private List<Tarifa> tarifas;
+
+	@OneToMany(mappedBy = "empresa")
+	private List<EntregaADomicilo> entregasADomicilio;
+
+	public void addTarifa(Tarifa tarifa) {
+		tarifa.setEmpresa(this);
+		this.tarifas.add(tarifa);
+	}
+
+	public void addEntregaADomicilo(EntregaADomicilo entrega) {
+		entrega.setEmpresa(this);
+		this.entregasADomicilio.add(entrega);
+	}
 
 	public EmpresaEnvios(String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra, double costoKgExtra,
 			double pesoMaximoDelPaquete) {
@@ -133,14 +124,6 @@ public class EmpresaEnvios {
 		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
 	}
 
-//	public Set<Tarifa> getTarifas() {
-//		return tarifas;
-//	}
-//
-//	public void setTarifas(Set<Tarifa> tarifas) {
-//		this.tarifas = tarifas;
-//	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -183,22 +166,7 @@ public class EmpresaEnvios {
 				return false;
 		} else if (!razonSocial.equals(other.razonSocial))
 			return false;
-//		if (tarifas == null) {
-//			if (other.tarifas != null)
-//				return false;
-//		} else if (!tarifas.equals(other.tarifas))
-//			return false;
 		return true;
 	}
 
 }
-
-//CREATE TABLE "empresa_de_envios" (
-//  "id_empresa" serial ,
-//  "razon_social" VARCHAR (50),
-//  "min_paquetes_por_viaje" integer,
-//  "costo_km_extra" numeric(2),
-//  "costo_kg_extra" numeric(2),
-//  "peso_maximo_por_paquete" numeric(2),
-//  PRIMARY KEY ("id_empresa")
-//);

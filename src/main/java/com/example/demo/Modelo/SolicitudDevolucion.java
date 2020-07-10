@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,13 +21,13 @@ public class SolicitudDevolucion {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_solicitud")
 	private int idSolicitud;
-	
+
 	@Column(name = "id_producto", nullable = false)
 	private int idProducto;
-	
+
 	@Column(name = "id_factura", nullable = false)
 	private int idFactura;
-	
+
 	@Column(name = "id_cliente", nullable = false)
 	private int idCliente;
 
@@ -39,20 +41,30 @@ public class SolicitudDevolucion {
 	@Column(name = "estado_aprobacion", nullable = false, length = 10)
 	private String estadoAprobacion;
 
-	public SolicitudDevolucion(int idSolicitud, int idProducto, int idFactura, int idCliente, Calendar fechaDeRegistro,
-			String motivoDevolucion, String estadoAprobacion) {
-		super();
-		this.idSolicitud = idSolicitud;
-		this.idProducto = idProducto;
-		this.idFactura = idFactura;
-		this.idCliente = idCliente;
-		this.fechaDeRegistro = fechaDeRegistro;
-		this.motivoDevolucion = motivoDevolucion;
-		this.estadoAprobacion = estadoAprobacion;
-	}
+	@OneToOne(mappedBy = "solicitudDevolucion")
+	private SolicitudAprobada solicitudAprobada;
+
+	@OneToOne(mappedBy = "solicitudDevolucion")
+	private SolicitudRechazada solicitudRechazada;
 
 	public SolicitudDevolucion() {
 		super();
+	}
+
+	public SolicitudRechazada getSolicitudRechazada() {
+		return solicitudRechazada;
+	}
+
+	public void setSolicitudRechazada(SolicitudRechazada solicitudRechazada) {
+		this.solicitudRechazada = solicitudRechazada;
+	}
+
+	public SolicitudAprobada getSolicitudAprobada() {
+		return solicitudAprobada;
+	}
+
+	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
+		this.solicitudAprobada = solicitudAprobada;
 	}
 
 	public int getIdSolicitud() {
@@ -160,6 +172,4 @@ public class SolicitudDevolucion {
 		return true;
 	}
 
-	
-	
 }

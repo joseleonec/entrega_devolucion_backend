@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +30,11 @@ public class SolicitudDevolucionControlador {
 	@GetMapping
 	public Iterable<SolicitudDevolucion> getAll() {
 		return solicitudDevolucionRepositorio.findAll();
+	}
+	
+	@GetMapping("/idcliente={id}")
+	public Iterable<SolicitudDevolucion> getByIdCliente(@PathVariable(value = "id") Integer id) {
+		return solicitudDevolucionRepositorio.findByIdCliente(id);
 	}
 
 	@GetMapping("/{id}")
