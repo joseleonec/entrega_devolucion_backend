@@ -4,10 +4,10 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -40,32 +40,55 @@ public class SolicitudDevolucion {
 
 	@Column(name = "estado_aprobacion", nullable = false, length = 10)
 	private String estadoAprobacion;
-
+	
+	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
+	private NotaDeCredito notaDeCredito;
+	
 	@OneToOne(mappedBy = "solicitudDevolucion")
-	private SolicitudAprobada solicitudAprobada;
+	private Sustitucion sustitucion;
 
-	@OneToOne(mappedBy = "solicitudDevolucion")
-	private SolicitudRechazada solicitudRechazada;
+
+//	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
+//	private SolicitudAprobada solicitudAprobada;
+//
+//	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
+//	private SolicitudRechazada solicitudRechazada;
+
+	public NotaDeCredito getNotaDeCredito() {
+		return notaDeCredito;
+	}
+
+	public void setNotaDeCredito(NotaDeCredito notaDeCredito) {
+		this.notaDeCredito = notaDeCredito;
+	}
+
+	public Sustitucion getSustitucion() {
+		return sustitucion;
+	}
+
+	public void setSustitucion(Sustitucion sustitucion) {
+		this.sustitucion = sustitucion;
+	}
 
 	public SolicitudDevolucion() {
 		super();
 	}
 
-	public SolicitudRechazada getSolicitudRechazada() {
-		return solicitudRechazada;
-	}
-
-	public void setSolicitudRechazada(SolicitudRechazada solicitudRechazada) {
-		this.solicitudRechazada = solicitudRechazada;
-	}
-
-	public SolicitudAprobada getSolicitudAprobada() {
-		return solicitudAprobada;
-	}
-
-	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
-		this.solicitudAprobada = solicitudAprobada;
-	}
+//	public SolicitudAprobada getSolicitudAprobada() {
+//		return solicitudAprobada;
+//	}
+//
+//	public SolicitudRechazada getSolicitudRechazada() {
+//		return solicitudRechazada;
+//	}
+//
+//	public void setSolicitudRechazada(SolicitudRechazada solicitudRechazada) {
+//		this.solicitudRechazada = solicitudRechazada;
+//	}
+//
+//	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
+//		this.solicitudAprobada = solicitudAprobada;
+//	}
 
 	public int getIdSolicitud() {
 		return idSolicitud;

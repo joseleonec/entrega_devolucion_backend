@@ -2,6 +2,7 @@ package com.example.demo.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,10 +19,14 @@ public class NotaDeCredito {
 	@Column(name = "id_nota")
 	private int idNotaDeCredito;
 
-	@OneToOne
-	@JoinColumn(name = "id_solicitud_aprobada")
-	private SolicitudAprobada solicitudAprobada;
+//	@OneToOne
+//	@JoinColumn(name = "id_solicitud_aprobada")
+//	private SolicitudAprobada solicitudAprobada;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_solicitud", unique = true)
+	private SolicitudDevolucion solicitudDevolucion;
+	
 	@Column(name = "monto", nullable = false)
 	private double monto;
 
@@ -32,16 +37,24 @@ public class NotaDeCredito {
 		super();
 	}
 
-	public SolicitudAprobada getSolicitudAprobada() {
-		return solicitudAprobada;
-	}
-
-	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
-		this.solicitudAprobada = solicitudAprobada;
-	}
-
 	public int getIdNotaDeCredito() {
 		return idNotaDeCredito;
+	}
+
+//	public SolicitudAprobada getSolicitudAprobada() {
+//		return solicitudAprobada;
+//	}
+//
+//	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
+//		this.solicitudAprobada = solicitudAprobada;
+//	}
+
+	public SolicitudDevolucion getSolicitudDevolucion() {
+		return solicitudDevolucion;
+	}
+
+	public void setSolicitudDevolucion(SolicitudDevolucion solicitudDevolucion) {
+		this.solicitudDevolucion = solicitudDevolucion;
 	}
 
 	public void setIdNotaDeCredito(int idNotaDeCredito) {

@@ -2,6 +2,7 @@ package com.example.demo.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,9 +19,9 @@ public class Sustitucion {
 	@Column(name = "id_sustitucion")
 	private int idSustitucion;
 
-	@OneToOne
-	@JoinColumn(name = "id_solicitud_aprobada")
-	private SolicitudAprobada solicitudAprobada;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_solicitud", unique = true)
+	private SolicitudDevolucion solicitudDevolucion;
 
 	@Column(name = "id_producto_sustituto", nullable = false)
 	private double idProductoSustituto;
@@ -86,5 +87,15 @@ public class Sustitucion {
 			return false;
 		return true;
 	}
+
+	public SolicitudDevolucion getSolicitudDevolucion() {
+		return solicitudDevolucion;
+	}
+
+	public void setSolicitudDevolucion(SolicitudDevolucion solicitudDevolucion) {
+		this.solicitudDevolucion = solicitudDevolucion;
+	}
+	
+	
 
 }
