@@ -13,8 +13,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "solicitud_devolucion")
+@ApiModel
 public class SolicitudDevolucion {
 
 	@Id
@@ -40,7 +44,7 @@ public class SolicitudDevolucion {
 
 	@Column(name = "estado_aprobacion", nullable = false, length = 10)
 	private String estadoAprobacion;
-	
+
 	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
 	private NotaDeCredito notaDeCredito;
 	

@@ -10,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "parroquia")
+@ApiModel
 public class Parroquia {
 
 	@Id
@@ -21,7 +25,7 @@ public class Parroquia {
 	
 	@Column(name = "nombre_parroquia", length = 50)
 	private String nombreParroquia;
-	
+
 	@OneToMany(mappedBy="parroquia")
 	private List<Tarifa> tarifas;
 	

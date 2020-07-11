@@ -10,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "empresa_de_envios")
+@ApiModel
 public class EmpresaEnvios {
 
 	@Id

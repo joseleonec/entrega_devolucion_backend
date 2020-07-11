@@ -9,8 +9,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "tarifa")
+@ApiModel
 public class Tarifa {
 
 	@Id
@@ -23,11 +27,11 @@ public class Tarifa {
 
 	@Column(name = "minutos_estimados")
 	private double minutosEstimados;
-	
+    
     @ManyToOne
     @JoinColumn(name="id_parroquia")
 	private Parroquia parroquia;
-    
+
     @ManyToOne
     @JoinColumn(name="id_empresa")
 	private EmpresaEnvios empresa;

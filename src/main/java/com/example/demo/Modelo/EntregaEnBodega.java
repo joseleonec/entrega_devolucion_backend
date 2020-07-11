@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+
 @Entity
 @Table(name = "entrega_en_bodega")
+@ApiModel
 public class EntregaEnBodega {
 
 	@Id
