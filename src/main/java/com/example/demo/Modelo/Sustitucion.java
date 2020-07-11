@@ -19,7 +19,7 @@ public class Sustitucion {
 	@Column(name = "id_sustitucion")
 	private int idSustitucion;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "id_solicitud", unique = true)
 	private SolicitudDevolucion solicitudDevolucion;
 

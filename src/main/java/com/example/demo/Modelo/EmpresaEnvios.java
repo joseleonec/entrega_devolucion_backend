@@ -22,12 +22,6 @@ public class EmpresaEnvios {
 	@Column(name = "razon_social")
 	private String razonSocial;
 
-	@Column(name = "min_paquetes_por_viaje")
-	private int minimoDePaquetesPorViaje;
-
-	@Column(name = "costo_km_extra")
-	private double costoKmExtra;
-
 	@Column(name = "costo_kg_extra")
 	private double costoKgExtra;
 
@@ -50,28 +44,6 @@ public class EmpresaEnvios {
 		this.entregasADomicilio.add(entrega);
 	}
 
-	public EmpresaEnvios(String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra, double costoKgExtra,
-			double pesoMaximoDelPaquete) {
-		super();
-		this.razonSocial = razonSocial;
-		this.minimoDePaquetesPorViaje = minimoDePaquetesPorViaje;
-		this.costoKmExtra = costoKmExtra;
-		this.costoKgExtra = costoKgExtra;
-		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
-	}
-
-	public EmpresaEnvios(int idEmpresa, String razonSocial, int minimoDePaquetesPorViaje, double costoKmExtra,
-			double costoKgExtra, double pesoMaximoDelPaquete) {
-		super();
-		this.idEmpresa = idEmpresa;
-		this.razonSocial = razonSocial;
-		this.minimoDePaquetesPorViaje = minimoDePaquetesPorViaje;
-		this.costoKmExtra = costoKmExtra;
-		this.costoKgExtra = costoKgExtra;
-		this.pesoMaximoDelPaquete = pesoMaximoDelPaquete;
-//		this.tarifas = tarifas;
-	}
-
 	public EmpresaEnvios() {
 		super();
 	}
@@ -90,22 +62,6 @@ public class EmpresaEnvios {
 
 	public void setRazonSocial(String razonSocial) {
 		this.razonSocial = razonSocial;
-	}
-
-	public int getMinimoDePaquetesPorViaje() {
-		return minimoDePaquetesPorViaje;
-	}
-
-	public void setMinimoDePaquetesPorViaje(int minimoDePaquetesPorViaje) {
-		this.minimoDePaquetesPorViaje = minimoDePaquetesPorViaje;
-	}
-
-	public double getCostoKmExtra() {
-		return costoKmExtra;
-	}
-
-	public void setCostoKmExtra(double costoKmExtra) {
-		this.costoKmExtra = costoKmExtra;
 	}
 
 	public double getCostoKgExtra() {
@@ -131,10 +87,8 @@ public class EmpresaEnvios {
 		long temp;
 		temp = Double.doubleToLongBits(costoKgExtra);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(costoKmExtra);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + idEmpresa;
-		result = prime * result + minimoDePaquetesPorViaje;
 		temp = Double.doubleToLongBits(pesoMaximoDelPaquete);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((razonSocial == null) ? 0 : razonSocial.hashCode());
@@ -153,11 +107,7 @@ public class EmpresaEnvios {
 		EmpresaEnvios other = (EmpresaEnvios) obj;
 		if (Double.doubleToLongBits(costoKgExtra) != Double.doubleToLongBits(other.costoKgExtra))
 			return false;
-		if (Double.doubleToLongBits(costoKmExtra) != Double.doubleToLongBits(other.costoKmExtra))
-			return false;
 		if (idEmpresa != other.idEmpresa)
-			return false;
-		if (minimoDePaquetesPorViaje != other.minimoDePaquetesPorViaje)
 			return false;
 		if (Double.doubleToLongBits(pesoMaximoDelPaquete) != Double.doubleToLongBits(other.pesoMaximoDelPaquete))
 			return false;

@@ -19,11 +19,7 @@ public class NotaDeCredito {
 	@Column(name = "id_nota")
 	private int idNotaDeCredito;
 
-//	@OneToOne
-//	@JoinColumn(name = "id_solicitud_aprobada")
-//	private SolicitudAprobada solicitudAprobada;
-
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "id_solicitud", unique = true)
 	private SolicitudDevolucion solicitudDevolucion;
 	
@@ -41,13 +37,6 @@ public class NotaDeCredito {
 		return idNotaDeCredito;
 	}
 
-//	public SolicitudAprobada getSolicitudAprobada() {
-//		return solicitudAprobada;
-//	}
-//
-//	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
-//		this.solicitudAprobada = solicitudAprobada;
-//	}
 
 	public SolicitudDevolucion getSolicitudDevolucion() {
 		return solicitudDevolucion;

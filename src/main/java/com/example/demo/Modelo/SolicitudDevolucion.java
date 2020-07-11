@@ -44,51 +44,8 @@ public class SolicitudDevolucion {
 	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
 	private NotaDeCredito notaDeCredito;
 	
-	@OneToOne(mappedBy = "solicitudDevolucion")
+	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
 	private Sustitucion sustitucion;
-
-
-//	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
-//	private SolicitudAprobada solicitudAprobada;
-//
-//	@OneToOne(mappedBy = "solicitudDevolucion",  fetch = FetchType.LAZY)
-//	private SolicitudRechazada solicitudRechazada;
-
-	public NotaDeCredito getNotaDeCredito() {
-		return notaDeCredito;
-	}
-
-	public void setNotaDeCredito(NotaDeCredito notaDeCredito) {
-		this.notaDeCredito = notaDeCredito;
-	}
-
-	public Sustitucion getSustitucion() {
-		return sustitucion;
-	}
-
-	public void setSustitucion(Sustitucion sustitucion) {
-		this.sustitucion = sustitucion;
-	}
-
-	public SolicitudDevolucion() {
-		super();
-	}
-
-//	public SolicitudAprobada getSolicitudAprobada() {
-//		return solicitudAprobada;
-//	}
-//
-//	public SolicitudRechazada getSolicitudRechazada() {
-//		return solicitudRechazada;
-//	}
-//
-//	public void setSolicitudRechazada(SolicitudRechazada solicitudRechazada) {
-//		this.solicitudRechazada = solicitudRechazada;
-//	}
-//
-//	public void setSolicitudAprobada(SolicitudAprobada solicitudAprobada) {
-//		this.solicitudAprobada = solicitudAprobada;
-//	}
 
 	public int getIdSolicitud() {
 		return idSolicitud;
@@ -194,5 +151,15 @@ public class SolicitudDevolucion {
 			return false;
 		return true;
 	}
+
+	public void setNotaDeCredito(NotaDeCredito notaDeCredito) {
+		this.notaDeCredito = notaDeCredito;
+	}
+
+	public void setSustitucion(Sustitucion sustitucion) {
+		this.sustitucion = sustitucion;
+	}
+	
+	
 
 }

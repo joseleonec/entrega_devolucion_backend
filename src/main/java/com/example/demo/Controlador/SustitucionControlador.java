@@ -22,6 +22,7 @@ import com.example.demo.repository.SustitucionRepositorio;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.DELETE,
 		RequestMethod.POST, RequestMethod.PUT })
 public class SustitucionControlador {
+	
 	@Autowired
 	SustitucionRepositorio sustitucionRepositorio;
 

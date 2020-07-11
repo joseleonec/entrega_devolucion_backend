@@ -22,7 +22,6 @@ import com.example.demo.repository.NotaDeCreditoRepositorio;
 @CrossOrigin(origins = "*", allowedHeaders = "*", methods = { RequestMethod.GET, RequestMethod.DELETE,
 		RequestMethod.POST, RequestMethod.PUT })
 public class NotaDeCreditoControlador {
-	
 
 	@Autowired
 	NotaDeCreditoRepositorio notaDeCreditoRepositorio;
