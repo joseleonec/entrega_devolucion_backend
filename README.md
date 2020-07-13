@@ -3,6 +3,7 @@
 # Subsistema entrega y devolucion Backend
 
 # Desarrolladores
+
 JOSE LUIS LEON CARRION, (jose.leonc97@ucuenca.ec) 
 
 # Docente
@@ -10,5 +11,7 @@ JOSE LUIS LEON CARRION, (jose.leonc97@ucuenca.ec)
 Ing. CARLOS VILLIE MOROCHO ZURITA, (villie.morocho@ucuenca.edu.ec)
 
 # Facultad de Ingeniería
+
 # Universidad de Cuenca
+
 Este módulo fue desarrollado como parte de la materia Base de Datos II en el periodo marzo-julio 2020
