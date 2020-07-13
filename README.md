@@ -11,5 +11,4 @@ Ing. CARLOS VILLIE MOROCHO ZURITA, (villie.morocho@ucuenca.edu.ec)
 
 # Facultad de Ingeniería
 # Universidad de Cuenca
-# Título del módulo
-Este módulo fue desarrollado como parte de la materia Base de Datos II , periodo marzo-julio 2020
+Este módulo fue desarrollado como parte de la materia Base de Datos II en el periodo marzo-julio 2020
